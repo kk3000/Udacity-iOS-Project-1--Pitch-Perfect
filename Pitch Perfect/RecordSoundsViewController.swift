@@ -60,7 +60,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
 
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
+        
+        //delegate set to get information on the audioRecorder
         audioRecorder.delegate = self
+        
         audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         recordButton.enabled = false;
@@ -70,12 +73,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         if(flag){
+            //Success Finished recording
             println("func audioRecorderDidFinishRecording -- Recording was Successful")
             recordedAudio = RecordedAudio(filePathUrl: recorder.url,title: recorder.url.lastPathComponent!)
             
-            
+            //Using segue - stopRecording, transition to PlaySoundViewController. The recorded is passed.
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         }else{
+            // Error during recording
             println("func audioRecorderDidFinishRecording -- Recording was NOT successful")
             recordButton.enabled = true;
             stopButton.hidden = true

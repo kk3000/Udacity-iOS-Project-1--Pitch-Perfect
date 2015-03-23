@@ -20,13 +20,6 @@ class PlaySoundViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        if var filePath = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3"){
-//            var filePathUrl = NSURL.fileURLWithPath(filePath)
-//            
-//            
-//        }else {
-//            println("Path for audio file not found")
-//        }
         audioPlayer = AVAudioPlayer(contentsOfURL: recordedAudio.filePathUrl, error: nil)
         audioPlayer.enableRate = true
         
@@ -36,46 +29,42 @@ class PlaySoundViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     
     @IBAction func stopSound(sender: UIButton) {
         audioPlayer.stop()
     }
     
+    
     @IBAction func playSlowAudio(sender: UIButton) {
+        //when tortoise is pressed
        playAudio(0.5)
         
     }
     
     @IBAction func playFastSound(sender: UIButton) {
+        //when rabbit is pressed
         playAudio(2.0)
         
     }
     
     
     @IBAction func playChimunkSound(sender: AnyObject) {
+        //when chipmunk is pressed
         playSoundWithDifferentPitch(1000)
     }
     
     
     @IBAction func playDarthWaderSound(sender: AnyObject) {
+        //When Darthwader is pressed
         playSoundWithDifferentPitch(-1000)
     }
     
+    
     func playSoundWithDifferentPitch (var pitch:Float){
+        //Function to play soundwith different pitch
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
@@ -97,6 +86,7 @@ class PlaySoundViewController: UIViewController {
     }
     
     func playAudio(var rate:Float){
+        //Play audio at different speeds/rate
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
