@@ -35,6 +35,7 @@ class PlaySoundViewController: UIViewController {
     
     @IBAction func stopSound(sender: UIButton) {
         audioPlayer.stop()
+        audioEngine.stop()
     }
     
     
@@ -90,7 +91,8 @@ class PlaySoundViewController: UIViewController {
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
-        
+        //Audio starts from the beginning
+        audioPlayer.currentTime = 0
         audioPlayer.rate = rate
         audioPlayer.play()
     }
